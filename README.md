@@ -1,8 +1,3 @@
-Got it 👍 — here’s a **clean, professional, human-written README.md** without emojis, icons, or decorative formatting.
-It’s written in a simple and direct style that would look good to technical reviewers.
-
----
-
 # Hospital Bulk Processing System
 
 This project implements a FastAPI service for bulk hospital data processing.
@@ -191,6 +186,3 @@ Developed by Naveen Satyarthi, email : naveensatyarthi@gmail.com
 Assignment: Senior Python Developer Assessment – Hospital Bulk Processing System
 External API: Hospital Directory API ([https://hospital-directory.onrender.com/docs](https://hospital-directory.onrender.com/docs))
 
----
-
-Would you like me to tailor this README a bit more for **Render deployment**, for example including environment variable configuration and Docker build instructions if your deployment will use Docker?
