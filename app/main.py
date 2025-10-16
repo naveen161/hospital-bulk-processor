@@ -12,7 +12,9 @@ from app.hospital_client import (
     update_hospital,
     delete_hospital,
     get_all_hospitals,
-    get_hospitals_by_batch
+    get_hospitals_by_batch,
+    activate_batch_api,
+    delete_batch_api, 
 )
 
 
@@ -95,3 +97,12 @@ async def list_hospitals_by_batch(batch_id: str):
 @app.get("/")
 async def health_check():
     return {"status": "ok", "message": "Hospital Bulk Processing API is running."}
+
+@app.patch("/hospitals/batch/{batch_id}/activate")
+async def activate_batch_endpoint(batch_id: str):
+    return await activate_batch_api(batch_id)
+
+
+@app.delete("/hospitals/batch/{batch_id}")
+async def delete_batch_endpoint(batch_id: str):
+    return await delete_batch_api(batch_id)

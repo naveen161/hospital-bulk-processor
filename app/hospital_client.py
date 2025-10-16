@@ -80,3 +80,18 @@ async def get_hospitals_by_batch(batch_id: str):
             return resp.json()
         return {"error": f"Failed to fetch hospitals for batch {batch_id}. Status: {resp.status_code}"}
 
+
+async def activate_batch_api(batch_id: str):
+    async with httpx.AsyncClient(timeout=15.0) as client:
+        resp = await client.patch(f"{BASE_URL}/hospitals/batch/{batch_id}/activate")
+        if resp.status_code == 200:
+            return {"message": f"Batch {batch_id} activated successfully"}
+        return {"error": f"Failed to activate batch {batch_id}. Status: {resp.status_code}"}
+
+
+async def delete_batch_api(batch_id: str):
+    async with httpx.AsyncClient(timeout=15.0) as client:
+        resp = await client.delete(f"{BASE_URL}/hospitals/batch/{batch_id}")
+        if resp.status_code == 200:
+            return {"message": f"Batch {batch_id} deleted successfully"}
+        return {"error": f"Failed to delete batch {batch_id}. Status: {resp.status_code}"}
