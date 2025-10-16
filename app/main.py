@@ -10,7 +10,9 @@ from app.hospital_client import (
     create_hospital_individual,
     get_hospital_by_id,
     update_hospital,
-    delete_hospital
+    delete_hospital,
+    get_all_hospitals,
+    get_hospitals_by_batch
 )
 
 
@@ -65,6 +67,7 @@ async def bulk_create_hospitals(file: UploadFile = File(...)):
     )
 
 
+
 @app.post("/hospitals/")
 async def create_hospital_proxy(hospital: dict):
     return await create_hospital_individual(hospital)
@@ -80,3 +83,15 @@ async def update_hospital_proxy(hospital_id: int, hospital: dict):
 @app.delete("/hospitals/{hospital_id}")
 async def delete_hospital_proxy(hospital_id: int):
     return await delete_hospital(hospital_id)
+
+@app.get("/hospitals/")
+async def list_all_hospitals():
+    return await get_all_hospitals()
+
+@app.get("/hospitals/batch/{batch_id}")
+async def list_hospitals_by_batch(batch_id: str):
+    return await get_hospitals_by_batch(batch_id)
+
+@app.get("/")
+async def health_check():
+    return {"status": "ok", "message": "Hospital Bulk Processing API is running."}

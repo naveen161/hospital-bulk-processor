@@ -44,6 +44,14 @@ async def activate_batch(batch_id: str) -> bool:
             return False
 
 
+async def get_all_hospitals():
+    async with httpx.AsyncClient(timeout=15.0) as client:
+        resp = await client.get(f"{BASE_URL}/hospitals/")
+        if resp.status_code == 200:
+            return resp.json()
+        return {"error": f"Failed to fetch hospitals. Status code: {resp.status_code}"}
+
+
 async def create_hospital_individual(hospital: dict):
     async with httpx.AsyncClient(timeout=15.0) as client:
         resp = await client.post(f"{BASE_URL}/hospitals/", json=hospital)
@@ -63,3 +71,12 @@ async def delete_hospital(hospital_id: int):
     async with httpx.AsyncClient(timeout=15.0) as client:
         resp = await client.delete(f"{BASE_URL}/hospitals/{hospital_id}")
         return {"status": resp.status_code, "message": "Deleted" if resp.status_code == 200 else resp.text}
+    
+
+async def get_hospitals_by_batch(batch_id: str):
+    async with httpx.AsyncClient(timeout=15.0) as client:
+        resp = await client.get(f"{BASE_URL}/hospitals/batch/{batch_id}")
+        if resp.status_code == 200:
+            return resp.json()
+        return {"error": f"Failed to fetch hospitals for batch {batch_id}. Status: {resp.status_code}"}
+
